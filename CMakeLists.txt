@@ -10,7 +10,7 @@ include_directories( "/home/lchuang/anaconda2/include" )
 link_directories( "/home/lchuang/anaconda2/lib")
 
 AUX_SOURCE_DIRECTORY(. SRC_LIST)
-SET(EXTRA_SRC_LIST ../sources/CFileSystem.cpp ../sources/RSImage.cpp ../sources/ImageInfo.cpp )
+#SET(EXTRA_SRC_LIST ../sources/CFileSystem.cpp ../sources/RSImage.cpp ../sources/ImageInfo.cpp )
 
 FIND_PACKAGE(GDAL REQUIRED)
 FIND_PACKAGE(OpenCV REQUIRED)
@@ -21,5 +21,6 @@ message(${SRC_LIST} ${EXTRA_SRC_LIST} ${FORTRAN_SRC} )
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x ")
 
-add_executable(test_gdal_opencv ${SRC_LIST} ${EXTRA_SRC_LIST} )
+add_executable(test_gdal_opencv ${SRC_LIST}  )
+#${EXTRA_SRC_LIST}
 target_link_libraries(test_gdal_opencv  ${GDAL_LIBRARY} ${OpenCV_LIBS})
