@@ -10,10 +10,16 @@
 #include <string>
 using namespace std;
 
-#define FORMAT_CHAR_LENGTH 2048
+#include "CFileSystem.h"
+CFileSystem filesys;
+
+//#define FORMAT_CHAR_LENGTH 2048
 
 #include "gdal_priv.h"
 #include "cpl_conv.h" // for CPLMalloc()
+
+#include "RSImage.h"
+
 
 
 // opencv
@@ -24,6 +30,50 @@ using namespace std;
 
 using namespace cv;
 
+
+
+cv::Mat read_image_by_gdal(const string& filename)
+{
+    cv::Mat cv_img;
+
+    CRSImage* img_obj = new CRSImage;
+    if (!img_obj->Open(filename.c_str()))
+    {
+        filesys.OutputLogMessage("can not open image: " + filename);
+        return cv_img;
+    }
+
+    int nband = 1 ;
+    int width = img_obj->GetWidth();
+    int height = img_obj->GetHeight();
+    int band_count = img_obj->GetBandCount();
+    
+    cout<<"width: "<<width<<" height: "<<height<<" bandcount: "<<band_count<<endl;
+    
+    BYTE **dataPerband = new BYTE*[band_count] ;
+    for(int i=0;i<band_count;i++)
+    {
+        dataPerband[i] = new BYTE[width*height];
+        memset(dataPerband[i],0,sizeof(BYTE)*width*height);
+    }
+    
+    img_obj->ReadImageDataToByte(dataPerband);
+    
+    //create cv::Mat
+//    cv::Mat cvimg = cv:imread("");
+//    cv::Mat cv_img(width,height,) ;
+
+
+    for(int i=0;i<band_count;i++)
+    {
+        delete []dataPerband[i];
+    }
+    delete []dataPerband;
+    dataPerband = nullptr;
+
+    return cv_img;
+
+}
 
 
 cv::Mat ReadImageToCVMat(const string& filename,
@@ -55,9 +105,11 @@ cv::Mat ReadImageToCVMat(const string& filename,
     return cv_img;
 }
 
+
 int main(int argc, const char * argv[])
 {
-    
+    string img_path = "/Users/huanglingcao/Data/aws_SpaceNet/voc_format/AOI_3_Paris_Train/8bit_image/RGB-PanSharpen_AOI_3_Paris_8bit_img997.tif";
+    read_image_by_gdal(img_path);
 
     return 0;
 }

@@ -6,8 +6,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ~/codes/testGdal_Opencv)
 
 include_directories( "${PROJECT_SOURCE_DIR}" )
 
-include_directories( "/home/lchuang/anaconda2/include" )
-link_directories( "/home/lchuang/anaconda2/lib")
+#include_directories( "/home/lchuang/anaconda2/include" )
+#link_directories( "/home/lchuang/anaconda2/lib")
 
 AUX_SOURCE_DIRECTORY(. SRC_LIST)
 #SET(EXTRA_SRC_LIST ../sources/CFileSystem.cpp ../sources/RSImage.cpp ../sources/ImageInfo.cpp )
@@ -18,7 +18,7 @@ FIND_PACKAGE(OpenCV REQUIRED)
 message( ${GDAL_LIBRARY} )
 message(${SRC_LIST} ${EXTRA_SRC_LIST} ${FORTRAN_SRC} )
 
-
+ADD_DEFINITIONS(-D__LINUX__)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x ")
 
 add_executable(test_gdal_opencv ${SRC_LIST}  )
