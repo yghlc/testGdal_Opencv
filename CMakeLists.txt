@@ -22,4 +22,4 @@ message(${SRC_LIST} ${EXTRA_SRC_LIST} ${FORTRAN_SRC} )
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x ")
 
 add_executable(test_gdal_opencv ${SRC_LIST} ${EXTRA_SRC_LIST} )
-target_link_libraries(getoffset  ${GDAL_LIBRARY} ${OpenCV_LIBS})
+target_link_libraries(test_gdal_opencv  ${GDAL_LIBRARY} ${OpenCV_LIBS})
