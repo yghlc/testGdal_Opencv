@@ -6,6 +6,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 include_directories( "${PROJECT_SOURCE_DIR}" )
 
+include_directories( "/home/lchuang/anaconda2/include" )
+link_directories( "/home/lchuang/anaconda2/lib")
+
 AUX_SOURCE_DIRECTORY(. SRC_LIST)
 SET(EXTRA_SRC_LIST ../sources/CFileSystem.cpp ../sources/RSImage.cpp ../sources/ImageInfo.cpp )
 
