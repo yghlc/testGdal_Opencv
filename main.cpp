@@ -62,6 +62,9 @@ cv::Mat read_image_by_gdal(const string& filename)
     //create cv::Mat
 //    cv::Mat cvimg = cv:imread("");
 //    cv::Mat cv_img(width,height,) ;
+    // copy image data
+    cv::Mat read_img(width,height,CV_8UC(band_count));
+    cout<<"width: "<<read_img.cols<<" height: "<<read_img.rows<<" bandcount: "<<read_img.channels()<<endl;
 
 
     for(int i=0;i<band_count;i++)
