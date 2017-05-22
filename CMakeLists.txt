@@ -15,7 +15,7 @@ AUX_SOURCE_DIRECTORY(. SRC_LIST)
 
 #FIND_PACKAGE(GDAL REQUIRED)
 #FIND_PACKAGE(OpenCV 3.2.0 REQUIRED)
-set(OpenCV_LIBS libopencv_core.so.3.2.0 libopencv_core.so.3.2.0  libopencv_imgcodecs.so.3.2.0 libopencv_imgproc.so.3.2.0 )
+set(OpenCV_LIBS opencv_core.so  opencv_imgcodecs.so opencv_imgproc.so )
 
 #message( ${GDAL_LIBRARY} )
 message(${SRC_LIST} ${EXTRA_SRC_LIST} ${FORTRAN_SRC} )
