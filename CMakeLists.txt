@@ -7,8 +7,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ~/codes/testGdal_Opencv)
 
 include_directories( "${PROJECT_SOURCE_DIR}" )
 
-#include_directories( "/home/lchuang/anaconda2/include" )
-#link_directories( "/home/lchuang/anaconda2/lib")
+include_directories( "~/programs/include" )
+link_directories( "~/programs/lib")
 
 AUX_SOURCE_DIRECTORY(. SRC_LIST)
 #SET(EXTRA_SRC_LIST ../sources/CFileSystem.cpp ../sources/RSImage.cpp ../sources/ImageInfo.cpp )
