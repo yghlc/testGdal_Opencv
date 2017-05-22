@@ -129,7 +129,7 @@ int main(int argc, const char * argv[])
     int pixel = 100;
     for(int i=0;i<cv_img.channels();i++)
     {
-        cout<<"band: "<<(i+1)<< cv_img[i*8*100];
+        cout<<"band: "<<(i+1)<< cv_img.data[i*8*100];
     }
 
     return 0;
