@@ -89,7 +89,7 @@ cv::Mat ReadImageToCVMat(const string& filename,
     int cv_read_flag = (is_color ? CV_LOAD_IMAGE_COLOR :
                         CV_LOAD_IMAGE_GRAYSCALE);
 //    cv::Mat cv_img_origin = cv::imread(filename, cv_read_flag);
-    cv::Mat cv_img_origin = cv::imread(filename, cv::IMREAD_LOAD_GDAL );
+    cv::Mat cv_img_origin = cv::imread(filename, cv::IMREAD_LOAD_GDAL | cv::IMREAD_ANYDEPTH );
     if (!cv_img_origin.data) {
         //LOG(ERROR) << "Could not open or find file " << filename;
        cout<< "Could not open or find file " << filename<<endl;
@@ -123,7 +123,14 @@ int main(int argc, const char * argv[])
 //    read_image_by_gdal(img_path);
     cv::Mat cv_img = ReadImageToCVMat(img_path,0,0,false,NULL,NULL);
 
-    cv::imwrite("save.tif",cv_img);
+//    cv::Mat save_img(cv_img.rows,cv_img.cols,cv_img.depth());
+//    cv::imwrite("save.tif",cv_img);
+    //output one pixel of each band for validation
+    int pixel = 100;
+    for(int i=0;i<cv_img.channels();i++)
+    {
+        cout<<"band: "<<(i+1)<< cv_img[i*8*100];
+    }
 
     return 0;
 }
