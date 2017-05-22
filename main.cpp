@@ -97,9 +97,9 @@ cv::Mat ReadImageToCVMat(const string& filename,
     }
    
     cout<<"file:"<<filename<<endl; 
-    cout<<"width: "<<cv_img_origin.cols<<" height: "<<cv_img_origin.rows<<" bandcount: "<<cv_img_origin.channels()<<endl;
+    cout<<"width: "<<cv_img_origin.cols<<" height: "<<cv_img_origin.rows<<" bandcount: "<<cv_img_origin.channels()<<" depth: "<<cv_img_origin.depth()<<endl;
     cout<<"type:"<<cv_img_origin.type()<<endl;
-    cv::imwrite("save.tif",cv_img_origin); 
+
 
     if (height > 0 && width > 0) {
         cv::resize(cv_img_origin, cv_img, cv::Size(width, height));
@@ -123,7 +123,9 @@ int main(int argc, const char * argv[])
     string img_path = "/Users/huanglingcao/Data/aws_SpaceNet/voc_format/AOI_3_Paris_Train/8bit_image/RGB-PanSharpen_AOI_3_Paris_8bit_img997.tif";
     img_path = argv[1];
 //    read_image_by_gdal(img_path);
-    ReadImageToCVMat(img_path,0,0,false,NULL,NULL);
+    cv::Mat cv_img = ReadImageToCVMat(img_path,0,0,false,NULL,NULL);
+
+    cv::imwrite("save.tif",cv_img);
 
     return 0;
 }
