@@ -14,7 +14,7 @@ AUX_SOURCE_DIRECTORY(. SRC_LIST)
 #SET(EXTRA_SRC_LIST ../sources/CFileSystem.cpp ../sources/RSImage.cpp ../sources/ImageInfo.cpp )
 
 #FIND_PACKAGE(GDAL REQUIRED)
-FIND_PACKAGE(OpenCV REQUIRED)
+FIND_PACKAGE(OpenCV 3.2.0 REQUIRED)
 
 #message( ${GDAL_LIBRARY} )
 message(${SRC_LIST} ${EXTRA_SRC_LIST} ${FORTRAN_SRC} )
