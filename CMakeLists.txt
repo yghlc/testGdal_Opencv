@@ -3,6 +3,7 @@ project (test_gdal_opencv)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ~/codes/testGdal_Opencv)
+set(GDAL_INCLUDE_DIR ~/anaconda2/include )
 
 include_directories( "${PROJECT_SOURCE_DIR}" )
 

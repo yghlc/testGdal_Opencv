@@ -89,14 +89,18 @@ cv::Mat ReadImageToCVMat(const string& filename,
     int cv_read_flag = (is_color ? CV_LOAD_IMAGE_COLOR :
                         CV_LOAD_IMAGE_GRAYSCALE);
 //    cv::Mat cv_img_origin = cv::imread(filename, cv_read_flag);
-    cv::Mat cv_img_origin = cv::imread(filename, cv::IMREAD_LOAD_GDAL | cv::IMREAD_COLOR);
+    cv::Mat cv_img_origin = cv::imread(filename, cv::IMREAD_LOAD_GDAL );
     if (!cv_img_origin.data) {
         //LOG(ERROR) << "Could not open or find file " << filename;
-        return cv_img_origin;
+       cout<< "Could not open or find file " << filename<<endl;
+	    return cv_img_origin;
     }
-    
+   
+    cout<<"file:"<<filename<<endl; 
     cout<<"width: "<<cv_img_origin.cols<<" height: "<<cv_img_origin.rows<<" bandcount: "<<cv_img_origin.channels()<<endl;
-    
+    cout<<"type:"<<cv_img_origin.type()<<endl;
+    cv::imwrite("save.tif",cv_img_origin); 
+
     if (height > 0 && width > 0) {
         cv::resize(cv_img_origin, cv_img, cv::Size(width, height));
     } else {
@@ -119,7 +123,7 @@ int main(int argc, const char * argv[])
     string img_path = "/Users/huanglingcao/Data/aws_SpaceNet/voc_format/AOI_3_Paris_Train/8bit_image/RGB-PanSharpen_AOI_3_Paris_8bit_img997.tif";
     img_path = argv[1];
 //    read_image_by_gdal(img_path);
-    ReadImageToCVMat(img_path);
+    ReadImageToCVMat(img_path,0,0,false,NULL,NULL);
 
     return 0;
 }
