@@ -127,9 +127,10 @@ int main(int argc, const char * argv[])
 //    cv::imwrite("save.tif",cv_img);
     //output one pixel of each band for validation
     int pixel = 100;
+    cout<<cv_img<<endl;
     for(int i=0;i<cv_img.channels();i++)
     {
-        cout<<"band: "<<(i+1)<< cv_img.data[i*8*100];
+        cout<<"band: "<<(i+1)<< cv_img.data[i*8*100]<<endl;
     }
 
     return 0;
