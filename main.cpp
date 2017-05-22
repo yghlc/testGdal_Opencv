@@ -109,6 +109,7 @@ cv::Mat ReadImageToCVMat(const string& filename,
 int main(int argc, const char * argv[])
 {
     string img_path = "/Users/huanglingcao/Data/aws_SpaceNet/voc_format/AOI_3_Paris_Train/8bit_image/RGB-PanSharpen_AOI_3_Paris_8bit_img997.tif";
+    img_path = argv[1];
     read_image_by_gdal(img_path);
 
     return 0;
