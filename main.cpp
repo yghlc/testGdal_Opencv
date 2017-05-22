@@ -58,14 +58,16 @@ cv::Mat read_image_by_gdal(const string& filename)
     }
     
     img_obj->ReadImageDataToByte(dataPerband);
+    cout<<"pixel band 1:"<<dataPerband[0][100]<<"pixel band 2:"<<dataPerband[1][100]<<endl;
     
     //create cv::Mat
 //    cv::Mat cvimg = cv:imread("");
 //    cv::Mat cv_img(width,height,) ;
     // copy image data
-    cv::Mat read_img(width,height,CV_8UC(band_count));
+    cv::Mat read_img(height,width,CV_8UC(band_count));
     cout<<"width: "<<read_img.cols<<" height: "<<read_img.rows<<" bandcount: "<<read_img.channels()<<endl;
-
+//    read_img.data
+//    cv::imwrite("save.png", read_img);
 
     for(int i=0;i<band_count;i++)
     {
@@ -86,11 +88,14 @@ cv::Mat ReadImageToCVMat(const string& filename,
     cv::Mat cv_img;
     int cv_read_flag = (is_color ? CV_LOAD_IMAGE_COLOR :
                         CV_LOAD_IMAGE_GRAYSCALE);
-    cv::Mat cv_img_origin = cv::imread(filename, cv_read_flag);
+//    cv::Mat cv_img_origin = cv::imread(filename, cv_read_flag);
+    cv::Mat cv_img_origin = cv::imread(filename, cv::IMREAD_LOAD_GDAL | cv::IMREAD_COLOR);
     if (!cv_img_origin.data) {
         //LOG(ERROR) << "Could not open or find file " << filename;
         return cv_img_origin;
     }
+    
+    cout<<"width: "<<cv_img_origin.cols<<" height: "<<cv_img_origin.rows<<" bandcount: "<<cv_img_origin.channels()<<endl;
     
     if (height > 0 && width > 0) {
         cv::resize(cv_img_origin, cv_img, cv::Size(width, height));
@@ -113,7 +118,8 @@ int main(int argc, const char * argv[])
 {
     string img_path = "/Users/huanglingcao/Data/aws_SpaceNet/voc_format/AOI_3_Paris_Train/8bit_image/RGB-PanSharpen_AOI_3_Paris_8bit_img997.tif";
     img_path = argv[1];
-    read_image_by_gdal(img_path);
+//    read_image_by_gdal(img_path);
+    ReadImageToCVMat(img_path);
 
     return 0;
 }
